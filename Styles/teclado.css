@@ -1,0 +1,75 @@
+/* CSS Document */
+
+#teclado {
+	margin:0 auto;
+	width:90%;
+}
+#write {
+	margin: 0 0 5px;
+	padding: 5px;
+	width: 100%;
+	height: 100px;
+	font: 1em/1.5 Verdana, Sans-Serif;
+	background: #fff;
+	border: 1px solid #f9f9f9;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+}
+#keyboard {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+#keyboard li {
+	float: left;
+	margin: 0 5px 5px 0;
+	width: 51px;
+	height: 40px;
+	line-height: 40px;
+	text-align: center;
+	background: #fff;
+	border: 1px solid #f9f9f9;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+}
+.capslock, .tab, .left-shift {
+	clear: left;
+}
+#keyboard .tab, #keyboard .delete {
+	width: 80px;
+}
+#keyboard .capslock {
+	width: 52px;
+}
+#keyboard .return {
+	width: 80px;
+}
+#keyboard .left-shift {
+	width: 90px;
+}
+#keyboard .right-shift {
+	width: 100px;
+}
+.lastitem {
+	margin-right: 0;
+}
+.uppercase {
+	text-transform: uppercase;
+}
+#keyboard .space {
+	clear: left;
+	width: 836px;
+}
+.on {
+	display: none;
+}
+#hsTeclado:hover{
+	cursor: pointer;
+}
+#keyboard li:hover {
+	position: relative;
+	top: 1px;
+	left: 1px;
+	border-color: #e5e5e5;
+	cursor: pointer;
+}

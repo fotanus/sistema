@@ -1,0 +1,220 @@
+/* CSS Document */
+body{
+    margin:5px 0 0 0;
+    padding:0;
+    height:100%;
+    background:#D8D8E2;
+    font-family: 'Doppio One', sans-serif;
+    font-size:13px;
+}
+h1, h2, h3, h4{
+    margin:2px;
+    padding:0;
+    font-weight:400;
+}
+select{
+    min-width:150px;
+    width:100%;
+}
+textarea{
+    min-height: 100px;
+}
+input[type="button"]{
+    min-width:150px;
+    border:#03C 1px solid;
+    border-radius:4px;
+    padding:3px;
+    background:#5B5B7B;
+    color:#FFF;
+}
+input:hover {
+    box-shadow:1px 1px 1px #000;
+}
+table{
+    width:100%;
+    table-layout:fixed;
+}
+table td{
+    padding:2px;
+    margin:1px;
+    border:1px solid #BED3E9;
+    background:#BED3E9;
+}
+.fk-table-header{
+    text-align:center;
+}
+.fk-table-header > td{
+    background:#538CC6;
+    color:#FFF;
+}
+.fk-copyr-notice{
+    text-align:right;
+    color:#000;
+    text-shadow:1px 1px 1px #FFF;
+}
+.fk-main-container{
+    border:#CCC 1px solid;
+    background:#F4F4F4;
+    border-radius:2px;
+    padding:5px 0;
+    margin-top:10px;
+}
+.fk-main-content-container{
+    min-height: 200px;
+}
+.fk-main-container-content{
+    background:#FFF;
+    min-height:400px;
+    border-radius:2px;
+}
+.fk-footer-container-div{
+    border:1px #CCC solid;
+    border-radius:2px;
+    padding:2px;
+    background:#D8D8E2;
+}
+.fk-footer-container-div > ul{
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    height: 100%;
+    overflow: hidden;
+}
+.fk-footer-container-div > ul > li{
+    margin: 2px;
+    padding: 2px 5px;
+    float: right;
+}
+.fk-footer-container-div > ul > li > a{
+    color: #5B5B7B;
+}
+.fk-forma{
+    max-width:250px;
+    margin:0 auto;
+    border:1px solid #CCC;
+    padding:2px;
+    overflow:hidden;
+}
+.fk-forma input, .fk-forma textarea{
+    font-family:Segoe, "Segoe UI", "DejaVu Sans", "Trebuchet MS", Verdana, sans-serif;
+    padding:2px;
+    border-radius:2px;
+}
+.fk-forma input[type="text"], .fk-forma input[type="password"], .fk-forma textarea{
+    width:96%;
+}
+.fk-forma input[type="button"]{
+    float: right;
+}
+.fk-menu-lateral-container{
+    padding:2px 0;
+    border:#CCC 1px solid;
+    font-size: 11px;
+}
+ul.fk-main-menu{
+    margin:0;
+    padding:0;
+    list-style:none;
+    position:relative;
+}
+ul.fk-main-menu a{
+    text-decoration:none;
+    color:#333;
+}
+ul.fk-main-menu a:hover{
+    text-decoration:underline;
+}
+ul.fk-main-menu li.fk-li-side{
+    float:left;
+}
+ul.fk-main-menu li.fk-li-sider{
+    float: right;
+}
+ul.fk-main-menu > li{
+    padding:3px 5px;
+    border:#CCC 1px solid;
+    margin:1px 5px;
+}
+li.color_fondo{
+    background:#5B5B7B;
+}
+ul.fk-main-menu > li:hover{
+    background:#5B5B7B;
+}
+ul.fk-main-menu > li:hover > a{
+    color:#FFF;
+}
+ul.fk-main-menu > li:hover > ul{
+    display:block;
+    z-index:9;
+}
+ul.fk-main-menu > li > ul{
+    list-style:none;
+    position:absolute;
+    display:none;
+    padding:1px;
+    margin:4px 0 0 -6px;
+    background:#EDF0F3;
+}
+ul.fk-main-menu > li > ul > li{
+    padding:3px 5px;
+    border:#CCC 1px solid;
+    background: #D8D8E2;
+    margin:1px;
+}
+#showErrorMsg{
+    display:none;
+}
+.fk-message{
+    border-radius:4px;
+}
+.fk-message-success{
+    border:#06F 1px solid;
+}
+.fk-message-error{
+    border:#F00 1px solid;
+}
+.fk-message-txt{
+    padding:5px;
+    display:block;
+    text-align:center;
+}
+.fk-galeria{
+    background: #000;
+    border-radius: 4px;
+    margin-top: 10px;
+    padding-bottom: 5px;
+    padding-top: 5px;
+}
+.fk-galeria img{
+    cursor: pointer;
+}
+.fk-galeria > .grid_12 > .grid_3 > div {
+    background: #5B5B7B;
+    border:#5B5B7B 1px solid;
+    border-radius: 2px;
+    margin:2px;
+    padding: 2px;
+}
+.fk-fullscreen{
+    display: none;
+    position: absolute;
+    top:0;
+    left:0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+.fk-fullscreen .container{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+.fk-fullscreen .container-top{
+    z-index: 9999;
+}
+.fk-fullscreen .back-light{
+    z-index: 2;
+    background: #000;
+    opacity: 0.8;
+}
