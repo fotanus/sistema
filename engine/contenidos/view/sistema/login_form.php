@@ -1,3 +1,5 @@
+<?php if (!defined('CODEBASE')) { die; } ?>
+
 <div class="container_12 fk-main-container fk-main-content-container">
     <div class="grid_12">
         <div class="fk-forma">

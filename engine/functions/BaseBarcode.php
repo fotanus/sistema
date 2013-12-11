@@ -1,5 +1,4 @@
-<?php
-if(!isset($config['fullpath'])) { die; }
+<?php if (!defined('CODEBASE')) { die; }
 
 abstract class BaseBarcode {
     //

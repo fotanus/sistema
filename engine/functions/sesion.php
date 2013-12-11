@@ -1,18 +1,19 @@
-<?php
+<?php if (!defined('CODEBASE')) { die; }
 
 session_start();
 
-class Sesion extends Config {
+class Sesion {
     
-    function __construct($data) {
-        parent::start($data);
+    var $cl = NULL;
+
+    function __construct(&$data) {
+        $this->cl = & $data;
         $this->Init();
     }
 
     function Init() {
-        
         if(!isset($_SESSION['sesion']['sessid'])){
-            $rand = $config['functions']['general']->generateRandomString();
+            $rand = $this->cl->functions->general->generateRandomString();
             $valor = time().$rand;
             $_SESSION['sesion']['sessid'] = $valor;
         }

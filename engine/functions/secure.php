@@ -1,13 +1,11 @@
-<?php
+<?php if (!defined('CODEBASE')) { die; }
 
-if (!isset($config['fullpath'])) {
-    //die;
-}
+class Secure {
 
-class Secure extends Config {
+    var $cl = NULL;
 
-    function __construct($data) {
-        parent::start($data);
+    function __construct(&$data) {
+        $this->cl = & $data;
     }
 
     function security() {
@@ -17,17 +15,14 @@ class Secure extends Config {
     }
 
     function logout() {
-        
-
         $_SESSION = array();
         session_destroy();
 
-        $this->config['functions']['general']->redirigir();
+        $this->functions->general->redirigir();
     }
     
     function forbidden(){
-        
-        $this->config['functions']['general']->redirigir("forbidden");
+        $this->functions->general->redirigir("forbidden");
     }
 
     function checkLevels($function_id = NULL) {
@@ -37,12 +32,12 @@ class Secure extends Config {
                 if(!in_array($function_id, $_SESSION['sesion']['usuario']['Permisos'])){
                     if(!in_array(1, $_SESSION['sesion']['usuario']['Permisos'])){
                         $this->forbidden();
-                        //die;
+                        die;
                     }
                 }
             } else {
                 $this->forbidden();
-                //die;
+                die;
             }
         }
     }

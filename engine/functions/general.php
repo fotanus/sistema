@@ -1,9 +1,11 @@
-<?php
+<?php if (!defined('CODEBASE')) { die; }
 
-class general extends Config {
-    
-    function __construct($data) {
-        parent::start($data);
+class general {
+
+    var $cl = NULL;
+
+    function __construct(&$data) {
+        $this->cl = & $data;
     }
 
     function generateRandomString($length = 10) {
@@ -20,7 +22,7 @@ class general extends Config {
     }
 
     function redirigir($url = "") {
-        return '<meta http-equiv="refresh" content="0;URL=\'' . $this->config['functions']['url']->returnURL($url) . '\'" />';
+        return '<meta http-equiv="refresh" content="0;URL=\'' . $this->functions->url->returnURL($url) . '\'" />';
     }
 
     function dropdownmenu($valores, $lista = false, $listid = 'rollist', $multiple = 'multiple') {
@@ -32,15 +34,6 @@ class general extends Config {
         }
         $dropdown .= "</select>";
         return $dropdown;
-    }
-
-    function mostrarMensaje($error, $t = "error") {
-
-        $tipo = array("error" => "pm-error-message", "sucess" => "pm-sucess-message");
-
-        $_SESSION['errores']['mostrar'] = true;
-        $_SESSION['errores']['mensaje'] = $error;
-        $_SESSION['errores']['estilo'] = $tipo[$t];
     }
 
 }

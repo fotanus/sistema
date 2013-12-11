@@ -1,5 +1,7 @@
 <?php
 
+define('CODEBASE', 'SISTEMAPOS');
+
 class Config {
 
 //If leave blank system will try to determine the path

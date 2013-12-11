@@ -1,4 +1,4 @@
-<?php
+<?php if (!defined('CODEBASE')) { die; }
 
 class Parsepages extends Config {
     /* private $niveles = '';
@@ -7,6 +7,7 @@ class Parsepages extends Config {
 
     function __contruct() {
         parent::__construct();
+        $this->config['Memoria'][] = 'Objeto: ' . __FUNCTION__ ." -> ".__FILE__." Linea: ".__LINE__. ' Tiempo: ' . microtime(true) . ' Memoria: ' . $this->convert(memory_get_usage());
     }
 
     function Init() {
@@ -69,6 +70,7 @@ class Parsepages extends Config {
                 }
             }
         }
+        $this->config['Memoria'][] = 'Objeto: ' . __FUNCTION__ ." -> ".__FILE__." Linea: ".__LINE__. ' Tiempo: ' . microtime(true) . ' Memoria: ' . $this->convert(memory_get_usage());
     }
 
     function showContent() {
@@ -108,6 +110,7 @@ class Parsepages extends Config {
             }
             $showerror = false;
         }
+        $this->config['Memoria'][] = 'Objeto: ' . __FUNCTION__ ." -> ".__FILE__." Linea: ".__LINE__. ' Tiempo: ' . microtime(true) . ' Memoria: ' . $this->convert(memory_get_usage());
     }
 
     function loadModule($name) {
@@ -121,6 +124,7 @@ class Parsepages extends Config {
                 }
             }
         }
+        $this->config['Memoria'][] = 'Objeto: ' . __FUNCTION__ ." -> ".__FILE__." Linea: ".__LINE__. ' Tiempo: ' . microtime(true) . ' Memoria: ' . $this->convert(memory_get_usage());
     }
 
     function loadLibrary($name) {
@@ -137,6 +141,7 @@ class Parsepages extends Config {
                 }
             }
         }
+        $this->config['Memoria'][] = 'Objeto: ' . $name . ' -> ' . __FUNCTION__ ." -> ".__FILE__." Linea: ".__LINE__. ' Tiempo: ' . microtime(true) . ' Memoria: ' . $this->convert(memory_get_usage());
     }
 
     function loadFunction($name, $startclass = TRUE) {
@@ -159,6 +164,7 @@ class Parsepages extends Config {
                 }
             }
         }
+        $this->config['Memoria'][] = 'Objeto: ' . $name . ' -> ' . __FUNCTION__ ." -> ".__FILE__." -> ".__LINE__. ' Tiempo: ' . microtime(true) . ' Memoria: ' . $this->convert(memory_get_usage());
     }
 
     function loadView($page) {
@@ -169,6 +175,7 @@ class Parsepages extends Config {
         } else {
             $this->views[] = $page;
         }
+        $this->config['Memoria'][] = 'Objeto: ' . $page . ' -> ' . __FUNCTION__ ." -> ".__FILE__." -> ".__LINE__. ' Tiempo: ' . microtime(true) . ' Memoria: ' . $this->convert(memory_get_usage());
     }
 
     function load($page) {
@@ -179,4 +186,8 @@ class Parsepages extends Config {
         }
     }
 
+    function convert($size) {
+        $unit = array('b', 'kb', 'mb', 'gb', 'tb', 'pb');
+        return @round($size / pow(1024, ($i = floor(log($size, 1024)))), 2) . ' ' . $unit[$i];
+    }
 }

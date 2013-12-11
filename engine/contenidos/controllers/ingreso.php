@@ -1,9 +1,9 @@
-<?php
+<?php if (!defined('CODEBASE')) { die; }
 
 class Ingreso {
     
     var $cl = NULL;
-    function __construct($data) {
+    function __construct(&$data) {
         $this->cl =& $data;
     }
         

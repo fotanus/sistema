@@ -1,3 +1,4 @@
+<?php if (!defined('CODEBASE')) { die; } ?>
 <?php if (true == false) { ?>
     <link href="../../../../Styles/960_12_col.css" rel="stylesheet" type="text/css">
     <link href="../../../../Styles/sistema.css" rel="stylesheet" type="text/css">
@@ -18,7 +19,7 @@
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 <script src="<?php echo $GLOBALS['loadpage']->functions->url->returnPath('scripts/sistema.js'); ?>"></script>
 <script>
-    $(document).ready(function(e) {
+    $(document).ready(function() {
         $('#btnNuevoUsuario').click(function() {
             var a_Nombre = $('.fk-forma').find('input[name="a_Nombre"]').val();
             var a_Apellido = $('.fk-forma').find('input[name="a_Apellido"]').val();
@@ -31,7 +32,7 @@
                 success: function(output) {
                     var dt = $.parseJSON(output);
                     showErrorMsg(dt.mensaje, dt.tipo);
-                    if(dt.rload){
+                    if (dt.rload) {
                         window.location = '<?php echo $GLOBALS['loadpage']->functions->url->returnUrl('sistema/dashboard'); ?>'
                     }
                 }

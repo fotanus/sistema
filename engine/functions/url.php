@@ -1,13 +1,11 @@
-<?php
+<?php if (!defined('CODEBASE')) { die; }
 
-if (!isset($config['fullpath'])) {
-    //die;
-}
+class Url {
 
-class Url extends Config {
+    var $cl = NULL;
 
-    function __construct($data) {
-        parent::start($data);
+    function __construct(&$data) {
+        $this->cl = & $data;
     }
 
     function createURL($to, $name) {
@@ -32,9 +30,9 @@ class Url extends Config {
 
     function returnPath($to = "") {
         if ($to == "") {
-            return $this->config['fullpath'];
+            return $this->cl->config['fullpath'];
         } else {
-            return $this->config['fullpath'] . '/' . $to;
+            return $this->cl->config['fullpath'] . '/' . $to;
         }
     }
 

@@ -1,18 +1,25 @@
-<?php
-//if(!isset($config['fullpath'])) { die; }
+<?php if (!defined('CODEBASE')) { die; }
 
-class Error404 extends Load{
-	
-	function index(){
-		parent::carga('header');
-		parent::carga('404');
-		parent::carga('footer');
-	}
-	
-	function ingreso(){
-		parent::carga('header');
-                parent::carga('sistema/menu');
-		parent::carga('404');   
-		parent::carga('footer');
-	}
+class Error404 {
+
+    var $cl = NULL;
+
+    function __construct(&$data) {
+        $this->cl = & $data;
+    }
+
+    function index() {
+        $this->cl->loadView('header');
+        $this->cl->loadView('404');
+        $this->cl->loadView('footer');
+    }
+
+    function ingreso() {
+        $this->cl->loadView('header');
+        $this->cl->loadView('sistema/menu');
+        $this->cl->loadView('404');
+        $this->cl->loadView('footer');
+        
+    }
+
 }

@@ -1,23 +1,20 @@
-<?php
+<?php if (!defined('CODEBASE')) { die; }
 
-if (!isset($config['fullpath'])) {
-    //die;
-}
-
-class Encrypt extends Config {
+class Encrypt {
 
     var $ref;
     var $llave;
     var $IV;
     var $ks;
     var $IV_size;
-    var $cl;
+    
+    var $cl = NULL;
 
-    function __construct($data) {
+    function __construct(&$data) {
         
-        parent::start($data);
+        $this->cl = & $data;
         
-        $super_secret_key = md5($this->config['encrypt']['token']);
+        $super_secret_key = md5($this->cl->config['encrypt']['token']);
 
         $this->ref = mcrypt_module_open('rijndael-256', '', 'ofb', '');
         $this->IV_size = mcrypt_enc_get_iv_size($this->ref);

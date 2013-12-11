@@ -1,20 +1,16 @@
-<?php
-
-if (!isset($config['fullpath'])) {
-    die;
-}
+<?php if (!defined('CODEBASE')) { die; }
 
 class Sistema {
     
     var $cl = NULL;
-    function __construct($data) {
+    function __construct(&$data) {
         $this->cl =& $data;
     }
 
     function index() {
-        parent::carga('header');
-        parent::carga('sistema/login_form');
-        parent::carga('footer');
+        $this->cl->loadView('header');
+        $this->cl->loadView('sistema/login_form');
+        $this->cl->loadView('footer');
     }
 
     function salir() {
@@ -26,17 +22,11 @@ class Sistema {
         
         $this->cl->functions->secure->security();
         $this->cl->functions->secure->checkLevels(2);
-        //$config['functions']['secure']->security();
-        //$config['functions']['secure']->checkLevels(2);
-        
+                
         $this->cl->loadView('header');
         $this->cl->loadView('sistema/menu');
         $this->cl->loadView('sistema/noticiasyeventos');
         $this->cl->loadView('footer');
-        /*parent::carga('header');
-        parent::carga('sistema/menu');
-        parent::carga('sistema/noticiasyeventos');
-        parent::carga('footer');*/
     }
 
     function configuracion() {
@@ -44,18 +34,16 @@ class Sistema {
     }
 
     function usuarios() {
-        global $config;
-        $config['functions']['secure']->security();
-        $config['functions']['secure']->checkLevels(4);
+        $this->cl->functions->secure->security();
+        $this->cl->functions->secure->checkLevels(4);
 
-        parent::carga('header');
-        parent::carga('sistema/menu');
-        parent::carga('sistema/forma_nuevo');
-        parent::carga('footer');
+        $this->cl->loadView('header');
+        $this->cl->loadView('sistema/menu');
+        $this->cl->loadView('sistema/forma_nuevo');
+        $this->cl->loadView('footer');
     }
 
     function permisos() {
-        global $config;
         $config['functions']['secure']->security();
         $config['functions']['secure']->checkLevels(6);
 
