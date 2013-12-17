@@ -42,7 +42,7 @@ class Encrypt {
 
     /**
      * Decodes the given encrypted string
-     * @param type $data
+     * @param encoded $data
      * @return type
      */
     function Decrypt($data) {
