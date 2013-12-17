@@ -54,12 +54,14 @@ class Parsepages extends Config {
         }
 
         $this->config['niveles'] = array_filter($new_array);
-        $this->config['funcion'] = "index"; //funcion inicial
+        $this->config['funcion'] = "index"; //initial function
 
         if (!isset($this->config['niveles'][$this->config['pathlevel']])) {
-            //La clase a iniciar para el controlador principal
-            $this->config['page_to_load'] = 'engine/contenidos/controllers/inicio.php'; //Archivo a cargar
-            $this->config['class_to_start'] = "inicio"; // Clase a iniciar
+            /**
+             * Class to start for main controller
+             */
+            $this->config['page_to_load'] = 'engine/contenidos/controllers/inicio.php'; //File to be loaded
+            $this->config['class_to_start'] = "inicio"; // Class to start
         } else {
             $this->config['page_to_load'] = 'engine/contenidos/controllers/' . filter_var($this->config['niveles'][$this->config['pathlevel']], FILTER_SANITIZE_STRING) . '.php';
             $this->config['class_to_start'] = filter_var($this->config['niveles'][$this->config['pathlevel']], FILTER_SANITIZE_STRING);
@@ -77,8 +79,7 @@ class Parsepages extends Config {
 
         $showerror = false;
         if (!is_object($this->controllers)) {
-            $this->controllers = new stdClass();
-            
+            $this->controllers = new stdClass();//Create a new stdClass so new objects can be added in runtime
         }
         if ((include $this->config['page_to_load']) === FALSE) {
             $showerror = true;
@@ -100,7 +101,7 @@ class Parsepages extends Config {
             }
         }
 
-        if ($showerror) {
+        if ($showerror) {//Show error if no controller/view was found in the system
             include 'engine/contenidos/controllers/error404.php';
             $this->controllers->Error404 = new Error404();
             $this->controllers->Error404->index();

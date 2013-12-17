@@ -6,24 +6,19 @@ class Smtp {
         
     }
 
-    function SendEmail($to, $toname, $subject, $message) {
-        global $config;
-        $config['sendmail'] = $this->authSendEmail('no-reply@misistemapyme.mx', 'Contacto MISIP', $to, $toname, $subject, $message);
-    }
-
-    function authSendEmail($from, $fromname, $to, $toname, $subject, $message) {
+    function SendEmail($from, $fromname, $to, $toname, $subject, $message) {
+        //Details, from, from name, to, to name
         $logArray['Vars'] = array("De" => $from, "De Nombre" => $fromname, "Para" => $to, "Para Nombre" => $toname);
-        //SMTP + SERVER DETAILS
-        /*         * * * CONFIGURATION START * * * */
+        
+        //Server configuration
         $smtpServer = "mail.misistemapyme.mx";
         $port = "25";
         $timeout = "2";
         $username = "no-reply@misistemapyme.mx";
-        $password = "FyPOr!^;M@HV";
+        $password = "";
         $identify = "localhost"; // This is used at the start of the connection to identify yourself but value isn't checked
         $newLine = "\r\n";
-        /*         * * * CONFIGURATION END * * * * */
-
+       
         //Connect to the host on the specified port
         $smtpConnect = @fsockopen($smtpServer, $port, $errno, $errstr, $timeout);
 

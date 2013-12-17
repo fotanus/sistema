@@ -35,7 +35,7 @@ class Config {
         $this->config['sistema']['version'] = '0.6b';
     }
     
-    function start($data){
+    function start(&$data){
         $this->config =& $data->config;
         $this->functions =& $data->functions;
         $this->libs =& $data->libs;
