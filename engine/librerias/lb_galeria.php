@@ -1,23 +1,6 @@
-<?php
-
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/**
- * Description of lb_galeria
- *
- * @author Kap
- */
-if (!isset($config['fullpath'])) {
-    die;
-}
+<?php if (!defined('CODEBASE')) { die; }
 
 class lb_galeria {
-
-    //put your code here
 
     private $thumb_path = "img/nye/thumb/";
     private $folder = "";
@@ -25,9 +8,13 @@ class lb_galeria {
     private $img_array = array();
     private $num_images = 0;
 
-    public function __construct() {
-        global $config;
-        $this->folder = $config['functions']['url']->returnFolfer($this->thumb_path);
+    var $cl = NULL;
+
+    function __construct(&$data) {
+        
+        $this->cl = & $data;
+        
+        $this->folder = $this->cl->functions->url->returnFolfer($this->thumb_path);
 
         $this->isdir = is_dir($this->folder);
         $this->readDir();
@@ -52,8 +39,7 @@ class lb_galeria {
     }
 
     public function GetHTML($start = 0) {
-        global $config;
-
+        
         $num_columnas = explode(".", $this->num_images / 4);
         $filas = (ceil($this->num_images / 4) > 3 ? 3 : ceil($this->num_images / 4));
 
@@ -71,7 +57,7 @@ class lb_galeria {
                 $filename = @$this->img_array[$llaves[$start]][4];
                 if (!empty($filename)) {
                     $html .= "<div class=\"grid_3 " . ($count == 0 ? 'alpha' : ($count == 3 ? 'omega' : '')) . "\"><div>";
-                    $html .= "<img src=\"" . $config['functions']['url']->returnPath($this->thumb_path . $filename) . "\" " . $wandh . " alt=\"$filename\"/>";
+                    $html .= "<img src=\"" . $this->cl->functions->url->returnPath($this->thumb_path . $filename) . "\" " . $wandh . " alt=\"$filename\"/>";
                     $html .= "</div></div>";
                 }
                 $start++;

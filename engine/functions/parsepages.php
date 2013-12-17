@@ -1,9 +1,6 @@
 <?php if (!defined('CODEBASE')) { die; }
 
 class Parsepages extends Config {
-    /* private $niveles = '';
-      private $page_to_load = '';
-      private $class_to_start; */
 
     function __contruct() {
         parent::__construct();
@@ -17,12 +14,12 @@ class Parsepages extends Config {
 
     function detectPath() {
 
-        $this->config['use_https'] = (@$_SERVER['HTTPS'] ? true : false);
+        if(isset($_SERVER['HTTPS'])){
+            $this->config['use_https'] = ($_SERVER['HTTPS'] ? true : false);
+        }
+        
         if ($this->config['fullpath'] == "") {
-            $this->config['fullpath'] = "http://" . $_SERVER['SERVER_NAME'];
-            if ($this->config['use_https']) {
-                $this->config['fullpath'] = "https://" . $_SERVER['SERVER_NAME'];
-            }
+            $this->config['fullpath'] = ($this->config['use_https'] ? "https://" : "http://" ) . $_SERVER['SERVER_NAME'];
             if ($this->config['root'] != "/") {
                 $this->config['fullpath'] .= "/" . $this->config['root'];
             }
@@ -58,7 +55,7 @@ class Parsepages extends Config {
 
         if (!isset($this->config['niveles'][$this->config['pathlevel']])) {
             /**
-             * Class to start for main controller
+             * Default class to start as main controller
              */
             $this->config['page_to_load'] = 'engine/contenidos/controllers/inicio.php'; //File to be loaded
             $this->config['class_to_start'] = "inicio"; // Class to start
@@ -79,20 +76,19 @@ class Parsepages extends Config {
 
         $showerror = false;
         if (!is_object($this->controllers)) {
-            $this->controllers = new stdClass();//Create a new stdClass so new objects can be added in runtime
+            $this->controllers = new stdClass(); //Create a new stdClass so new objects can be added in runtime
         }
         if ((include $this->config['page_to_load']) === FALSE) {
             $showerror = true;
         } else {
             if (class_exists($this->config['class_to_start'])) {
                 if (method_exists($this->config['class_to_start'], $this->config['funcion'])) {
-                    
+
                     $class_to_start = $this->config['class_to_start'];
                     $this->controllers->$class_to_start = new $class_to_start($this);
 
                     $function_to_start = $this->config['funcion'];
                     $this->controllers->$class_to_start->$function_to_start();
-                    
                 } else {
                     $showerror = true;
                 }
@@ -125,15 +121,16 @@ class Parsepages extends Config {
     }
 
     function loadLibrary($name) {
+        if (!is_object($this->libs)) {
+            $this->libs = new stdClass();
+        }
+
         $file = "engine/librerias/" . $name . ".php";
         if (!isset($this->config['librerias'][$name])) {
             if ((include $file) === FALSE) {
                 echo "No se encontro la libreria";
             } else {
                 if (class_exists($name)) {
-                    if (!is_object($this->libs)) {
-                        $this->libs = new stdClass();
-                    }
                     $this->libs->$name = new $name($this);
                 }
             }
@@ -143,21 +140,18 @@ class Parsepages extends Config {
 
     function loadFunction($name, $startclass = TRUE) {
 
+        if (!is_object($this->functions)) {
+            $this->functions = new stdClass();
+        }
+
         $file = "engine/functions/" . $name . ".php";
 
         if (!isset($this->config['functions'][$name])) {
             if ((include_once $file) === FALSE) {
-                echo "No se encontro la clase";
+                echo "Class not found";
             } else {
                 if (class_exists($name) && $startclass) {
-                    try {
-                        if (!is_object($this->functions)) {
-                            $this->functions = new stdClass();
-                        }
-                        $this->functions->$name = new $name($this);
-                    } catch (Exception $e) {
-                        echo $e->getMessage();
-                    }
+                    $this->functions->$name = new $name($this);
                 }
             }
         }
@@ -183,4 +177,5 @@ class Parsepages extends Config {
         }
         $this->logUse(__FUNCTION__, __FILE__, __LINE__);
     }
+
 }

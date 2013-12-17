@@ -1,16 +1,6 @@
-<?php
+<?php if (!defined('CODEBASE')) { die; }
 
-if (!isset($config['fullpath'])) {
-    die;
-}
-
-if (true == false) {
-    include_once("../functions/mysql.php");
-}
-
-$config['functions']['parsepages']->loadFunction('mysql', FALSE);
-
-//$config['functions']['parsepages']->loadLibrary('mysql', FALSE);
+$GLOBALS['loadpage']->loadFunction('mysql', FALSE);
 
 class lb_usuario extends MySQL {
 
@@ -186,7 +176,7 @@ class lb_usuario extends MySQL {
 
 }
 
-class User extends MySQL {
+class User {
 
     public $id = '';
     public $nombre = '';

@@ -13,7 +13,7 @@ class Encrypt {
     function __construct(&$data) {
         
         $this->cl = & $data;
-        
+        //Super secret key to encode everything
         $super_secret_key = md5($this->cl->config['encrypt']['token']);
 
         $this->ref = mcrypt_module_open('rijndael-256', '', 'ofb', '');
