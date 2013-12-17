@@ -27,6 +27,11 @@ class Encrypt {
         mcrypt_module_close($this->ref);
     }
 
+    /**
+     * Encrypts the given string
+     * @param String $data
+     * @return blob
+     */
     function Encrypt($data) {
         mcrypt_generic_init($this->ref, $this->llave, $this->IV);
         $result = mcrypt_generic($this->ref, $data);
@@ -35,6 +40,11 @@ class Encrypt {
         return $out;
     }
 
+    /**
+     * Decodes the given encrypted string
+     * @param type $data
+     * @return type
+     */
     function Decrypt($data) {
         $iv = substr($data, 0, $this->IV_size);
         $string = substr($data, $this->IV_size);
