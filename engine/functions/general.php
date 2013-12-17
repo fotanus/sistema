@@ -22,7 +22,7 @@ class general {
     }
 
     function redirigir($url = "") {
-        return '<meta http-equiv="refresh" content="0;URL=\'' . $this->functions->url->returnURL($url) . '\'" />';
+        return '<meta http-equiv="refresh" content="0;URL=\'' . $this->cl->functions->url->returnURL($url) . '\'" />';
     }
 
     function dropdownmenu($valores, $lista = false, $listid = 'rollist', $multiple = 'multiple') {

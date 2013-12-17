@@ -1,5 +1,4 @@
- <?php
-if(!isset($config['fullpath'])) { die; }
+ <?php if (!defined('CODEBASE')) { die; }
  
 include_once("BaseBarcode.php");
 class C39Barcode extends BaseBarcode {

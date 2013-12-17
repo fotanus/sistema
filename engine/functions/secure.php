@@ -16,6 +16,7 @@ class Secure {
 
     function logout() {
         $_SESSION = array();
+        unset($_SESSION);
         session_destroy();
 
         $this->functions->general->redirigir();

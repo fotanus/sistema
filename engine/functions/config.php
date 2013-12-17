@@ -41,4 +41,13 @@ class Config {
         $this->libs =& $data->libs;
         $this->controllers =& $data->controllers;
     }
+    
+    function convert($size) {
+        $unit = array('b', 'kb', 'mb', 'gb', 'tb', 'pb');
+        return @round($size / pow(1024, ($i = floor(log($size, 1024)))), 2) . ' ' . $unit[$i];
+    }
+    
+    function logUse($function, $file, $line){
+        $this->config['Memory'][] = 'Obj: ' . $function ." -> ".$file." Line: ".$line. ' Start: ' . microtime(true) . ' Memory: ' . $this->convert(memory_get_usage());
+    }
 }

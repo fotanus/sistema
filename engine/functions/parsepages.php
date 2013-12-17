@@ -7,7 +7,7 @@ class Parsepages extends Config {
 
     function __contruct() {
         parent::__construct();
-        $this->config['Memoria'][] = 'Objeto: ' . __FUNCTION__ ." -> ".__FILE__." Linea: ".__LINE__. ' Tiempo: ' . microtime(true) . ' Memoria: ' . $this->convert(memory_get_usage());
+        $this->logUse(__FUNCTION__, __FILE__, __LINE__);
     }
 
     function Init() {
@@ -70,7 +70,7 @@ class Parsepages extends Config {
                 }
             }
         }
-        $this->config['Memoria'][] = 'Objeto: ' . __FUNCTION__ ." -> ".__FILE__." Linea: ".__LINE__. ' Tiempo: ' . microtime(true) . ' Memoria: ' . $this->convert(memory_get_usage());
+        $this->logUse(__FUNCTION__, __FILE__, __LINE__);
     }
 
     function showContent() {
@@ -78,6 +78,7 @@ class Parsepages extends Config {
         $showerror = false;
         if (!is_object($this->controllers)) {
             $this->controllers = new stdClass();
+            
         }
         if ((include $this->config['page_to_load']) === FALSE) {
             $showerror = true;
@@ -101,16 +102,11 @@ class Parsepages extends Config {
 
         if ($showerror) {
             include 'engine/contenidos/controllers/error404.php';
-
             $this->controllers->Error404 = new Error404();
-            if (@$_SESSION['sesion']['loggedin'] && method_exists('Error404', 'ingreso')) {
-                $this->controllers->Error404->ingreso();
-            } else {
-                $this->controllers->Error404->index();
-            }
+            $this->controllers->Error404->index();
             $showerror = false;
         }
-        $this->config['Memoria'][] = 'Objeto: ' . __FUNCTION__ ." -> ".__FILE__." Linea: ".__LINE__. ' Tiempo: ' . microtime(true) . ' Memoria: ' . $this->convert(memory_get_usage());
+        $this->logUse(__FUNCTION__, __FILE__, __LINE__);
     }
 
     function loadModule($name) {
@@ -124,7 +120,7 @@ class Parsepages extends Config {
                 }
             }
         }
-        $this->config['Memoria'][] = 'Objeto: ' . __FUNCTION__ ." -> ".__FILE__." Linea: ".__LINE__. ' Tiempo: ' . microtime(true) . ' Memoria: ' . $this->convert(memory_get_usage());
+        $this->logUse(__FUNCTION__, __FILE__, __LINE__);
     }
 
     function loadLibrary($name) {
@@ -141,7 +137,7 @@ class Parsepages extends Config {
                 }
             }
         }
-        $this->config['Memoria'][] = 'Objeto: ' . $name . ' -> ' . __FUNCTION__ ." -> ".__FILE__." Linea: ".__LINE__. ' Tiempo: ' . microtime(true) . ' Memoria: ' . $this->convert(memory_get_usage());
+        $this->logUse(__FUNCTION__, __FILE__, __LINE__);
     }
 
     function loadFunction($name, $startclass = TRUE) {
@@ -164,7 +160,7 @@ class Parsepages extends Config {
                 }
             }
         }
-        $this->config['Memoria'][] = 'Objeto: ' . $name . ' -> ' . __FUNCTION__ ." -> ".__FILE__." -> ".__LINE__. ' Tiempo: ' . microtime(true) . ' Memoria: ' . $this->convert(memory_get_usage());
+        $this->logUse(__FUNCTION__, __FILE__, __LINE__);
     }
 
     function loadView($page) {
@@ -175,7 +171,7 @@ class Parsepages extends Config {
         } else {
             $this->views[] = $page;
         }
-        $this->config['Memoria'][] = 'Objeto: ' . $page . ' -> ' . __FUNCTION__ ." -> ".__FILE__." -> ".__LINE__. ' Tiempo: ' . microtime(true) . ' Memoria: ' . $this->convert(memory_get_usage());
+        $this->logUse(__FUNCTION__, __FILE__, __LINE__);
     }
 
     function load($page) {
@@ -184,10 +180,6 @@ class Parsepages extends Config {
         if ((include $contenido) === FALSE) {
             @include 'engine/contenidos/view/404.php';
         }
-    }
-
-    function convert($size) {
-        $unit = array('b', 'kb', 'mb', 'gb', 'tb', 'pb');
-        return @round($size / pow(1024, ($i = floor(log($size, 1024)))), 2) . ' ' . $unit[$i];
+        $this->logUse(__FUNCTION__, __FILE__, __LINE__);
     }
 }
